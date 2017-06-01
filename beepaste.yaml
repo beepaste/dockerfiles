@@ -1,0 +1,10 @@
+mongodb:
+    build: mongodb
+    ports:
+        - 27017:27017
+    environment:
+        MONGODB_USER: username
+        MONGODB_PASS: password
+        MONGODB_DATABASE: dbname
+    volumes:
+        - ./data:/data/db
