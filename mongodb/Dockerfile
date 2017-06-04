@@ -8,8 +8,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14
     echo "mongodb-org-shell hold" | dpkg --set-selections && \
     echo "mongodb-org-mongos hold" | dpkg --set-selections && \
     echo "mongodb-org-tools hold" | dpkg --set-selections
-    
-RUN mkdir /etc/ssl/mongodb/
+
+RUN mkdir -p /etc/ssl/mongodb/
 
 VOLUME /data/db
 
