@@ -8,6 +8,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14
     echo "mongodb-org-shell hold" | dpkg --set-selections && \
     echo "mongodb-org-mongos hold" | dpkg --set-selections && \
     echo "mongodb-org-tools hold" | dpkg --set-selections
+    
+RUN mkdir /etc/ssl/mongodb/
 
 VOLUME /data/db
 
@@ -17,6 +19,11 @@ ENV JOURNALING yes
 
 ADD run.sh /run.sh
 ADD set_mongodb_password.sh /set_mongodb_password.sh
+
+ADD mongod.conf /etc/mongod.conf
+
+ADD server.pem /etc/ssl/mongodb/server.pem
+ADD client.pem /etc/ssl/mongodb/client.pem
 
 EXPOSE 27017 27017
 
