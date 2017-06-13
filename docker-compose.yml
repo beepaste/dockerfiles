@@ -3,8 +3,8 @@ mongodb:
     ports:
         - 27017:27017
     environment:
-        MONGODB_USER: username
-        MONGODB_PASS: password
-        MONGODB_DATABASE: dbname
+        MONGODB_USER: beepasteio
+        MONGODB_PASS: imavcandoit
+        MONGODB_DATABASE: beepaste
     volumes:
         - ./data:/data/db
