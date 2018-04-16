@@ -1,0 +1,76 @@
+global:
+    base_url: 'https://beta.beepaste.io/'
+
+mongodb:
+    host: mongodb://localhost:27017/beepaste
+
+redis:
+    address: !!python/tuple ['localhost', 6379]
+#    password: my secret password
+    db: 0
+
+limits:
+    reset_timeout: 900
+    auth_timeout: 2592000
+    create_paste: 450
+    get_paste: 450
+
+api:
+    use_anonymous: yes
+
+bitly:
+    token: 'some-rnd-token'
+    use: false
+
+cron:
+    key: ihjwb498ubo4v898b9ebuojmdvmbdjkgoipj42us
+
+logger: &logger
+    version: 1
+    formatters:
+        beepasteFormater:
+            format: "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
+            datefmt: '%Y/%m/%d %H:%M:%S'
+    handlers:
+        file:
+            class : logging.FileHandler
+            formatter: beepasteFormater
+            level: INFO
+            filename: beepaste.log
+            # maxBytes: 52428800
+            # backupCount: 20
+        console:
+            class : logging.StreamHandler
+            formatter: beepasteFormater
+            level: INFO
+            stream: ext://sys.stdout
+    loggers:
+        beepaste:
+            level: INFO
+            handlers: [file]
+            qualname: beepaste
+            propagate: false
+        sanic:
+            level: INFO
+            handlers: [file]
+            qualname: sanic
+            propagate: false
+        network:
+            level: INFO
+            handlers: [file]
+            qualname: network
+            propagate: false
+    root:
+        level: INFO
+        handlers: [file]
+
+app:
+    port : 8080
+    host : localhost
+    workers: 8
+    # log_config: *logger
+    debug: True
+
+jwt:
+    secret: secret # TODO on production use some safe string
+    algorithm: HS512
